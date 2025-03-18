@@ -15,7 +15,7 @@ jobs:
 
   # DOCKER BUILD CANARY
   Build-Push-DockerGhcr:
-    if: ${{github.event_name == 'push' && github.ref_name == 'develop'}}
+    if: ${{github.ref_name == 'develop'}}
     uses: ./.github/workflows/z_Docker-Ghcr.yaml
     secrets: inherit
     with:
@@ -26,6 +26,13 @@ jobs:
   #   needs: [Build-Push-DockerGhcr]
   #   uses: ./.github/workflows/02-2_TrivyScan.yaml
   #   secrets: inherit
+
+  # TEST
+  Test_on_pr:
+    if: ${{github.ref_name == 'release/*'}}
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo CA MARCHE
   
 
   # DEPLOY CANARY
