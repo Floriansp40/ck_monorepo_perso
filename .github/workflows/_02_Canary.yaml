@@ -7,11 +7,11 @@ on:
 
 jobs:
   Display_Data:
-    runs-on: ubutun-latest
+    runs-on: ubuntu-latest
     steps:
       - name: Display Data 
         run: env | sort
-        
+
   # DOCKER BUILD CANARY
   Build-Push-DockerGhcr:
     if: ${{github.event_name == 'push'}}
