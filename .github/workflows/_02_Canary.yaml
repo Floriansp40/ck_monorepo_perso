@@ -11,6 +11,8 @@ jobs:
     if: ${{github.event_name == 'push'}}
     uses: ./.github/workflows/02-1_Docker-Ghcr.yaml
     secrets: inherit
+    with:
+      docker-mode: testmarcel
 
   # TRIVY SCAN
   # Trivy-Scan-Package:
