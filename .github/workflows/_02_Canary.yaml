@@ -9,7 +9,7 @@ jobs:
   # DOCKER BUILD CANARY
   Build-Push-DockerGhcr:
     if: ${{github.event_name == 'push'}}
-    uses: ./.github/workflows/02-1_Docker-Ghcr.yaml
+    uses: ./.github/workflows/z_Docker-Ghcr.yaml
     secrets: inherit
     with:
       docker-mode: testmarcel
