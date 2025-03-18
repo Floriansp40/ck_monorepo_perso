@@ -1,43 +1,41 @@
 name: 02 - Canary
 
 on:
-  pull_request:
-    branches:
-      - release/*
   push:
     branches:
-      - release/*
-  workflow_dispatch:
+      - develop
 
 jobs:
-
   # DOCKER BUILD CANARY
   Build-Push-DockerGhcr:
-    if: ${{github.event_name == 'pull_request'}}
+    if: ${{github.event_name == 'push'}}
     uses: ./.github/workflows/02-1_Docker-Ghcr.yaml
     secrets: inherit
 
   # TRIVY SCAN
-  Trivy-Scan-Package:
-    needs: [Build-Push-DockerGhcr]
-    uses: ./.github/workflows/02-2_TrivyScan.yaml
-    secrets: inherit
+  # Trivy-Scan-Package:
+  #   needs: [Build-Push-DockerGhcr]
+  #   uses: ./.github/workflows/02-2_TrivyScan.yaml
+  #   secrets: inherit
+  
 
   # DEPLOY CANARY
-  Deploy_Canary:
-    if: ${{github.event_name == 'pull'}}
-    uses: ./.github/workflows/02-3_DeployCanary.yaml
-    secrets: inherit
-    permissions:
-      id-token: write
-      contents: read
+  # Deploy_Canary:
+  #   if: ${{github.event_name == 'push'}}
+  #   uses: ./.github/workflows/02-3_DeployCanary.yaml
+  #   secrets: inherit
+  #   permissions:
+  #     id-token: write
+  #     contents: read
 
-  # ZAP SCAN
-  Zaproxy_Scan:
-    needs: [Deploy_Canary]
-    uses: ./.github/workflows/02-4_ZapScan.yaml
-    permissions:
-      issues: write
+  # # ZAP SCAN
+  # Zaproxy_Scan:
+  #   needs: [Deploy_Canary]
+  #   uses: ./.github/workflows/02-4_ZapScan.yaml
+  #   permissions:
+  #     issues: write
+
+  #----------------------------------
 
   # TEST FRONT BACK
   # Test_Back_Front:
