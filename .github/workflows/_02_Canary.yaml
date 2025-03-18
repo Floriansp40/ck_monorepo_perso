@@ -12,13 +12,13 @@ jobs:
     uses: ./.github/workflows/z_Docker-Ghcr.yaml
     secrets: inherit
     with:
-      docker-mode: testmarcel
+      docker-mode: canary
 
   # TRIVY SCAN
-  # Trivy-Scan-Package:
-  #   needs: [Build-Push-DockerGhcr]
-  #   uses: ./.github/workflows/02-2_TrivyScan.yaml
-  #   secrets: inherit
+  Trivy-Scan-Package:
+    needs: [Build-Push-DockerGhcr]
+    uses: ./.github/workflows/02-2_TrivyScan.yaml
+    secrets: inherit
   
 
   # DEPLOY CANARY
