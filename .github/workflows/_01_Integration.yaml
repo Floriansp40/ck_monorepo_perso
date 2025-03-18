@@ -9,6 +9,7 @@ jobs:
 
   # TEST FRONT BACK
   Test_Back_Front:
+    if: ${{github.event_name == 'pull_request'}}
     uses: ./.github/workflows/01-1_TestBackFront.yaml
 
   # QUALITY SONARQUBE
@@ -22,6 +23,13 @@ jobs:
     needs: [Quality_SonarQube]
     uses: ./.github/workflows/01-3_Snyk.yaml
     secrets: inherit
+  
+  #----------------------------------------------------------
+ 
+
+
+
+
 
 
   #-------------------------------------------
