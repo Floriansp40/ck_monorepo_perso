@@ -6,6 +6,12 @@ on:
       - develop
 
 jobs:
+  Display_Data:
+    runs-on: ubutun-latest
+    steps:
+      - name: Display Data 
+        run: env | sort
+        
   # DOCKER BUILD CANARY
   Build-Push-DockerGhcr:
     if: ${{github.event_name == 'push'}}
